@@ -12,7 +12,7 @@ extension ISO_18004 {
 extension ISO_18004.Mask {
     public static let all: [Self] = (0...7).compactMap(Self.init)
 
-    public func inverts(row i: Int, column j: Int) -> Bool {
+    func inverts(row i: Int, column j: Int) -> Bool {
         switch reference {
         case 0: (i + j) % 2 == 0
         case 1: i % 2 == 0

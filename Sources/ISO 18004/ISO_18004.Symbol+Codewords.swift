@@ -40,7 +40,7 @@ extension ISO_18004.Symbol {
         let divisor = Self.divisor(length)
         var parts: [[UInt8]] = []
         var start = 0
-        for index in 0..<count {
+        (0..<count).forEach { index in
             let size = shortLength - length + (index < short ? 0 : 1)
             var part = Array(data[start..<start + size])
             start += size
@@ -49,7 +49,7 @@ extension ISO_18004.Symbol {
             parts.append(part + remainder)
         }
         var result: [UInt8] = []
-        for position in 0...shortLength {
+        (0...shortLength).forEach { position in
             for (index, part) in parts.enumerated() where position != shortLength - length || index >= short {
                 result.append(part[position])
             }
@@ -69,8 +69,8 @@ extension ISO_18004.Symbol {
     static func divisor(_ degree: Int) -> [UInt8] {
         var result = [UInt8](repeating: 0, count: degree - 1) + [1]
         var root: UInt8 = 1
-        for _ in 0..<degree {
-            for index in 0..<degree {
+        (0..<degree).forEach { _ in
+            (0..<degree).forEach { index in
                 result[index] = product(result[index], root)
                 if index + 1 < degree { result[index] ^= result[index + 1] }
             }

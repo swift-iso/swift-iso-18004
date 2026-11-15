@@ -56,7 +56,8 @@ extension `ISO_18004.Symbol Tests`.Test.Unit {
     func `the format information names the level and the mask`() throws {
         let symbol = try #require(ISO_18004.Symbol(Array("example.org".utf8), level: .low, mask: ISO_18004.Mask(4)))
         #expect(symbol.mask.reference == 4)
-        let bits = (0...5).map { symbol[8, $0] } + [symbol[8, 7], symbol[8, 8], symbol[7, 8]] + (9..<15).map { symbol[14 - $0, 8] }
+        let rows = symbol.modules
+        let bits = (0...5).map { rows[$0][8] } + [rows[7][8], rows[8][8], rows[8][7]] + (9..<15).map { rows[8][14 - $0] }
         let read = bits.enumerated().reduce(0) { $0 | ($1.element ? 1 << $1.offset : 0) } ^ 0x5412
         #expect(read >> 10 == 0b01_100)
     }

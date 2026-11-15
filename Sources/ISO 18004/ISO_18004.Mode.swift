@@ -16,7 +16,9 @@ extension ISO_18004.Mode {
     public func holds(_ data: [UInt8]) -> Bool {
         switch self {
         case .numeric: data.allSatisfy { (UInt8(ascii: "0")...UInt8(ascii: "9")).contains($0) }
+
         case .alphanumeric: data.allSatisfy { Self.alphanumerics.contains($0) }
+
         case .byte: true
         }
     }
@@ -33,7 +35,9 @@ extension ISO_18004.Mode {
         let range = version.number < 10 ? 0 : version.number < 27 ? 1 : 2
         switch self {
         case .numeric: return [10, 12, 14][range]
+
         case .alphanumeric: return [9, 11, 13][range]
+
         case .byte: return [8, 16, 16][range]
         }
     }
@@ -54,11 +58,13 @@ extension ISO_18004.Mode {
                 let value = digits.reduce(0) { $0 * 10 + Int($1 - UInt8(ascii: "0")) }
                 return (value, [0, 4, 7, 10][digits.count])
             }
+
         case .alphanumeric:
             let values = data.compactMap { Self.alphanumerics.firstIndex(of: $0) }
             return stride(from: 0, to: values.count, by: 2).map { start in
                 start + 1 < values.count ? (values[start] * 45 + values[start + 1], 11) : (values[start], 6)
             }
+
         case .byte:
             return data.map { (Int($0), 8) }
         }

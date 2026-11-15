@@ -18,10 +18,11 @@
             let scale = 8
             let side = symbol.extent * scale
             var pixels = [UInt8](repeating: 255, count: side * side)
-            for y in 0..<symbol.size {
-                for x in 0..<symbol.size where symbol[x, y] {
-                    for dy in 0..<scale {
-                        for dx in 0..<scale {
+            (0..<symbol.size).forEach { y in
+                (0..<symbol.size).forEach { x in
+                    guard symbol.modules[y][x] else { return }
+                    (0..<scale).forEach { dy in
+                        (0..<scale).forEach { dx in
                             pixels[((y + ISO_18004.Symbol.quiet) * scale + dy) * side + (x + ISO_18004.Symbol.quiet) * scale + dx] = 0
                         }
                     }

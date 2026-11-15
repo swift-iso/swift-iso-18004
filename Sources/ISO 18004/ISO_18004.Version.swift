@@ -6,9 +6,11 @@ extension ISO_18004 {
             guard (1...40).contains(number) else { return nil }
             self.number = number
         }
-
-        public static func < (lhs: Self, rhs: Self) -> Bool { lhs.number < rhs.number }
     }
+}
+
+extension ISO_18004.Version {
+    public static func < (lhs: Self, rhs: Self) -> Bool { lhs.number < rhs.number }
 }
 
 extension ISO_18004.Version {

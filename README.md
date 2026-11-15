@@ -1,6 +1,6 @@
 # swift-iso-18004
 
-Use this package when you need to make a QR Code symbol (ISO/IEC 18004:2015) from bytes: `ISO_18004.Symbol(data, level:)` returns the grid of dark and light modules, or nil when no symbol holds the data. Drawing it (an image, SVG path data, a terminal) is the caller's: read `symbol[x, y]` for each of the `size` × `size` modules and leave a quiet zone of `ISO_18004.Symbol.quiet` light modules on every side, `extent` modules across in all.
+Use this package when you need to make a QR Code symbol (ISO/IEC 18004:2015) from bytes: `ISO_18004.Symbol(data, level:)` returns the grid of dark and light modules, or nil when no symbol holds the data. Drawing it (an image, SVG path data, a terminal) is the caller's: read `symbol.modules[y][x]`, row by row, for each of the `size` × `size` modules and leave a quiet zone of `ISO_18004.Symbol.quiet` light modules on every side, `extent` modules across in all.
 
 ## Coverage
 

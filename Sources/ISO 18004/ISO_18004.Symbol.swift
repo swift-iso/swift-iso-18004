@@ -4,7 +4,7 @@ extension ISO_18004 {
         public let level: ISO_18004.Correction.Level
         public let mode: ISO_18004.Mode
         public let mask: ISO_18004.Mask
-        public let modules: [Bool]
+        public let modules: [[Bool]]
 
         public init?(
             _ data: [UInt8],
@@ -42,7 +42,7 @@ extension ISO_18004 {
             self.level = level
             self.mode = mode
             self.mask = chosen
-            self.modules = best
+            self.modules = (0..<version.size).map { row in Array(best[row * version.size..<(row + 1) * version.size]) }
         }
     }
 }
@@ -53,6 +53,4 @@ extension ISO_18004.Symbol {
     public var size: Int { version.size }
 
     public var extent: Int { size + 2 * Self.quiet }
-
-    public subscript(x: Int, y: Int) -> Bool { modules[y * size + x] }
 }
