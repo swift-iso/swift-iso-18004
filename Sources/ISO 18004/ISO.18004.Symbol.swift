@@ -1,21 +1,21 @@
-extension ISO_18004 {
+extension ISO.`18004` {
     public struct Symbol: Sendable, Hashable {
-        public let version: ISO_18004.Version
-        public let level: ISO_18004.Correction.Level
-        public let mode: ISO_18004.Mode
-        public let mask: ISO_18004.Mask
+        public let version: ISO.`18004`.Version
+        public let level: ISO.`18004`.Correction.Level
+        public let mode: ISO.`18004`.Mode
+        public let mask: ISO.`18004`.Mask
         public let modules: [[Bool]]
 
         public init?(
             _ data: [UInt8],
-            level: ISO_18004.Correction.Level,
-            mode: ISO_18004.Mode? = nil,
-            version: ISO_18004.Version? = nil,
-            mask: ISO_18004.Mask? = nil
+            level: ISO.`18004`.Correction.Level,
+            mode: ISO.`18004`.Mode? = nil,
+            version: ISO.`18004`.Version? = nil,
+            mask: ISO.`18004`.Mask? = nil
         ) {
-            let mode = mode ?? ISO_18004.Mode(data)
+            let mode = mode ?? ISO.`18004`.Mode(data)
             guard mode.holds(data),
-                let smallest = ISO_18004.Version.all.first(where: { $0.capacity(mode, level) >= data.count })
+                let smallest = ISO.`18004`.Version.all.first(where: { $0.capacity(mode, level) >= data.count })
             else { return nil }
             let version = version ?? smallest
             guard version >= smallest else { return nil }
@@ -25,7 +25,7 @@ extension ISO_18004 {
                 version: version
             )
             let drawn = Self.drawn(codewords, version: version)
-            let candidates = mask.map { [$0] } ?? ISO_18004.Mask.all
+            let candidates = mask.map { [$0] } ?? ISO.`18004`.Mask.all
             var chosen = candidates[0]
             var best: [Bool] = []
             var lowest = Int.max
@@ -47,7 +47,7 @@ extension ISO_18004 {
     }
 }
 
-extension ISO_18004.Symbol {
+extension ISO.`18004`.Symbol {
     public static let quiet = 4
 
     public var size: Int { version.size }

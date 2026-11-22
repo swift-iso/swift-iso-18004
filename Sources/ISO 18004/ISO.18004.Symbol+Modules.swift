@@ -1,5 +1,5 @@
-extension ISO_18004.Symbol {
-    static func alignments(_ version: ISO_18004.Version) -> [Int] {
+extension ISO.`18004`.Symbol {
+    static func alignments(_ version: ISO.`18004`.Version) -> [Int] {
         let number = version.number
         guard number > 1 else { return [] }
         let count = number / 7 + 2
@@ -15,7 +15,7 @@ extension ISO_18004.Symbol {
         return result
     }
 
-    static func drawn(_ codewords: [UInt8], version: ISO_18004.Version) -> (dark: [Bool], reserved: [Bool]) {
+    static func drawn(_ codewords: [UInt8], version: ISO.`18004`.Version) -> (dark: [Bool], reserved: [Bool]) {
         let size = version.size
         var dark = [Bool](repeating: false, count: size * size)
         var reserved = [Bool](repeating: false, count: size * size)
@@ -95,9 +95,9 @@ extension ISO_18004.Symbol {
     static func masked(
         _ dark: [Bool],
         reserved: [Bool],
-        version: ISO_18004.Version,
-        level: ISO_18004.Correction.Level,
-        mask: ISO_18004.Mask
+        version: ISO.`18004`.Version,
+        level: ISO.`18004`.Correction.Level,
+        mask: ISO.`18004`.Mask
     ) -> [Bool] {
         let size = version.size
         var result = dark

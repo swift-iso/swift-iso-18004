@@ -1,4 +1,4 @@
-extension ISO_18004 {
+extension ISO.`18004` {
     public enum Mode: Sendable, Hashable, CaseIterable {
         case numeric
         case alphanumeric
@@ -6,7 +6,7 @@ extension ISO_18004 {
     }
 }
 
-extension ISO_18004.Mode {
+extension ISO.`18004`.Mode {
     static let alphanumerics: [UInt8] = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:".utf8)
 
     public init(_ data: [UInt8]) {
@@ -31,7 +31,7 @@ extension ISO_18004.Mode {
         }
     }
 
-    func count(_ version: ISO_18004.Version) -> Int {
+    func count(_ version: ISO.`18004`.Version) -> Int {
         let range = version.number < 10 ? 0 : version.number < 27 ? 1 : 2
         switch self {
         case .numeric: return [10, 12, 14][range]

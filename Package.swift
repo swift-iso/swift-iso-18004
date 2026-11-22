@@ -14,11 +14,15 @@ let package = Package(
     products: [
         .library(name: "ISO 18004", targets: ["ISO 18004"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/swift-iso/swift-iso.git", branch: "main")
+    ],
     targets: [
         .target(
             name: "ISO 18004",
-            dependencies: []
+            dependencies: [
+                .product(name: "ISO", package: "swift-iso")
+            ]
         ),
         .testTarget(
             name: "ISO 18004 Tests",

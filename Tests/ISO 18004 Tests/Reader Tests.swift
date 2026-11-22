@@ -5,16 +5,16 @@
     import ISO_18004
     import Testing
 
-    enum `ISO_18004 Reader Tests` {}
+    enum `ISO.18004 Reader Tests` {}
 
-    extension `ISO_18004 Reader Tests` {
+    extension `ISO.18004 Reader Tests` {
         @Suite struct Test {
             @Suite struct Integration {}
         }
     }
 
-    extension `ISO_18004 Reader Tests`.Test.Integration {
-        static func read(_ symbol: ISO_18004.Symbol) -> String? {
+    extension `ISO.18004 Reader Tests`.Test.Integration {
+        static func read(_ symbol: ISO.`18004`.Symbol) -> String? {
             let scale = 8
             let side = symbol.extent * scale
             var pixels = [UInt8](repeating: 255, count: side * side)
@@ -23,7 +23,7 @@
                     guard symbol.modules[y][x] else { return }
                     (0..<scale).forEach { dy in
                         (0..<scale).forEach { dx in
-                            pixels[((y + ISO_18004.Symbol.quiet) * scale + dy) * side + (x + ISO_18004.Symbol.quiet) * scale + dx] = 0
+                            pixels[((y + ISO.`18004`.Symbol.quiet) * scale + dy) * side + (x + ISO.`18004`.Symbol.quiet) * scale + dx] = 0
                         }
                     }
                 }
@@ -57,17 +57,17 @@
             String(repeating: "abcdefghijklmnopqrstuvwxyz0123456789", count: 30),
         ]
 
-        @Test(arguments: ISO_18004.Correction.Level.allCases)
-        func `a symbol is read back by the system's own reader as the text it was made from`(_ level: ISO_18004.Correction.Level) throws {
+        @Test(arguments: ISO.`18004`.Correction.Level.allCases)
+        func `a symbol is read back by the system's own reader as the text it was made from`(_ level: ISO.`18004`.Correction.Level) throws {
             for text in Self.texts {
-                let symbol = try #require(ISO_18004.Symbol(Array(text.utf8), level: level))
+                let symbol = try #require(ISO.`18004`.Symbol(Array(text.utf8), level: level))
                 #expect(Self.read(symbol) == text, "\(text) at \(level), version \(symbol.version.number), \(symbol.mode)")
             }
         }
 
-        @Test(arguments: ISO_18004.Mask.all)
-        func `every mask is read back`(_ mask: ISO_18004.Mask) throws {
-            let symbol = try #require(ISO_18004.Symbol(Array("example.org".utf8), level: .quartile, version: ISO_18004.Version(7), mask: mask))
+        @Test(arguments: ISO.`18004`.Mask.all)
+        func `every mask is read back`(_ mask: ISO.`18004`.Mask) throws {
+            let symbol = try #require(ISO.`18004`.Symbol(Array("example.org".utf8), level: .quartile, version: ISO.`18004`.Version(7), mask: mask))
             #expect(Self.read(symbol) == "example.org")
         }
     }

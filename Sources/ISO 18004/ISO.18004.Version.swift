@@ -1,4 +1,4 @@
-extension ISO_18004 {
+extension ISO.`18004` {
     public struct Version: Sendable, Hashable, Comparable {
         public let number: Int
 
@@ -9,11 +9,11 @@ extension ISO_18004 {
     }
 }
 
-extension ISO_18004.Version {
+extension ISO.`18004`.Version {
     public static func < (lhs: Self, rhs: Self) -> Bool { lhs.number < rhs.number }
 }
 
-extension ISO_18004.Version {
+extension ISO.`18004`.Version {
     public static let all: [Self] = (1...40).compactMap(Self.init)
 
     public var size: Int { number * 4 + 17 }

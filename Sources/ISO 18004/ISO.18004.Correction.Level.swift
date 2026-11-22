@@ -1,4 +1,4 @@
-extension ISO_18004.Correction {
+extension ISO.`18004`.Correction {
     public enum Level: Sendable, Hashable, CaseIterable {
         case low
         case medium
@@ -7,7 +7,7 @@ extension ISO_18004.Correction {
     }
 }
 
-extension ISO_18004.Correction.Level {
+extension ISO.`18004`.Correction.Level {
     var indicator: Int {
         switch self {
         case .low: 0b01

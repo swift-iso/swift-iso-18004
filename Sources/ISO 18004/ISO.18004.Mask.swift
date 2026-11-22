@@ -1,4 +1,4 @@
-extension ISO_18004 {
+extension ISO.`18004` {
     public struct Mask: Sendable, Hashable {
         public let reference: Int
 
@@ -9,7 +9,7 @@ extension ISO_18004 {
     }
 }
 
-extension ISO_18004.Mask {
+extension ISO.`18004`.Mask {
     public static let all: [Self] = (0...7).compactMap(Self.init)
 
     func inverts(row i: Int, column j: Int) -> Bool {

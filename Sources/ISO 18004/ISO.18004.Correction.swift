@@ -1,3 +1,3 @@
-extension ISO_18004 {
+extension ISO.`18004` {
     public enum Correction {}
 }

@@ -1,4 +1,4 @@
-extension ISO_18004.Version {
+extension ISO.`18004`.Version {
     var modules: Int {
         var result = (16 * number + 128) * number + 64
         if number >= 2 {
@@ -11,11 +11,11 @@ extension ISO_18004.Version {
 
     var codewords: Int { modules / 8 }
 
-    func data(_ level: ISO_18004.Correction.Level) -> Int {
+    func data(_ level: ISO.`18004`.Correction.Level) -> Int {
         codewords - level.correction[number - 1] * level.blocks[number - 1]
     }
 
-    public func capacity(_ mode: ISO_18004.Mode, _ level: ISO_18004.Correction.Level) -> Int {
+    public func capacity(_ mode: ISO.`18004`.Mode, _ level: ISO.`18004`.Correction.Level) -> Int {
         mode.characters(data(level) * 8 - 4 - mode.count(self))
     }
 }

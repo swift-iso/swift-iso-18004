@@ -1,9 +1,9 @@
-extension ISO_18004.Symbol {
+extension ISO.`18004`.Symbol {
     static func codewords(
         _ data: [UInt8],
-        mode: ISO_18004.Mode,
-        level: ISO_18004.Correction.Level,
-        version: ISO_18004.Version
+        mode: ISO.`18004`.Mode,
+        level: ISO.`18004`.Correction.Level,
+        version: ISO.`18004`.Version
     ) -> [UInt8] {
         let capacity = version.data(level) * 8
         var bits: [Bool] = []
@@ -29,8 +29,8 @@ extension ISO_18004.Symbol {
 
     static func interleaved(
         _ data: [UInt8],
-        level: ISO_18004.Correction.Level,
-        version: ISO_18004.Version
+        level: ISO.`18004`.Correction.Level,
+        version: ISO.`18004`.Version
     ) -> [UInt8] {
         let count = level.blocks[version.number - 1]
         let length = level.correction[version.number - 1]
